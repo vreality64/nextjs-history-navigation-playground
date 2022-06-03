@@ -1,0 +1,1 @@
+export { Item as default } from '../../src/pages/products/Item';
