@@ -17,6 +17,7 @@ export function Layout({ title, children }) {
 
       <div className={styles.navigation}>
         <button className={styles.button} onClick={navigation.back}>{'<'} 뒤로</button>
+        <button className={styles.button} onClick={() => location.href = '/'}>HOME</button>
         <button className={styles.button} onClick={navigation.forward}>앞으로 {'>'}</button>
       </div>
 
