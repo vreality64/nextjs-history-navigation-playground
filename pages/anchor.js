@@ -1,0 +1,1 @@
+export { Anchor as default } from '../src/pages/Anchor';

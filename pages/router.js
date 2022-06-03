@@ -1,0 +1,1 @@
+export { Router as default } from '../src/pages/Router';
