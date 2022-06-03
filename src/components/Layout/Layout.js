@@ -1,7 +1,12 @@
 import Head from 'next/head'
+import Router from 'next/router';
+import { Mode, useRouterMode } from '../RouterModeContext/RouterModeContext'
 import styles from './Layout.module.css'
+import { useMemo } from 'react'
 
 export function Layout({ title, children }) {
+  const navigation = useNavigation();
+
   return (
     <div className={styles.container}>
       <Head>
@@ -10,7 +15,10 @@ export function Layout({ title, children }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Layout.Navigation />
+      <div className={styles.navigation}>
+        <button className={styles.button} onClick={navigation.back}>{'<'} 뒤로</button>
+        <button className={styles.button} onClick={navigation.forward}>앞으로 {'>'}</button>
+      </div>
 
       <div className={styles.container__inner}>
         {children}
@@ -19,11 +27,20 @@ export function Layout({ title, children }) {
   )
 }
 
-Layout.Navigation = function Navigation() {
-  return (
-    <div className={styles.navigation}>
-      <button className={styles.button} onClick={() => history.back()}>{'<'} 뒤로</button>
-      <button className={styles.button} onClick={() => history.forward()}>앞으로 {'>'}</button>
-    </div>
-  )
+function useNavigation() {
+  const { mode } = useRouterMode();
+
+  return useMemo(() => {
+    if (mode === Mode.Native) {
+      return {
+        back: () => history.back(),
+        forward: () => history.forward(),
+      }
+    }
+
+    return {
+      back: () => Router.back(),
+      forward: () => history.forward(),
+    }
+  }, [mode])
 }
