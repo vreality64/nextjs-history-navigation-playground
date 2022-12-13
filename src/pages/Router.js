@@ -1,4 +1,4 @@
-import Router as NextRouter from "next/router";
+import NextRouter from "next/router";
 import { Layout } from "../components/Layout/Layout";
 import { useMock } from '../hooks/useMock';
 import styles from './List.module.css'
