@@ -1,10 +1,9 @@
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { Layout } from "../components/Layout/Layout";
 import { useMock } from '../hooks/useMock';
 import styles from './List.module.css'
 
 export function Router() {
-  const router = useRouter();
   const mock = useMock({ size: 10 });
 
   return (
@@ -17,7 +16,7 @@ export function Router() {
             <div
               key={`${value}-${idx}`}
               onClick={() => {
-                router.push({
+                Router.push({
                   pathname: `/products/${value}`
                 })
               }}
